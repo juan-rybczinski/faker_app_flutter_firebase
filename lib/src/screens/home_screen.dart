@@ -44,10 +44,34 @@ class JobsListView extends ConsumerWidget {
 
     return FirestoreListView(
       query: firestoreRepository.jobsQuery(),
-      itemBuilder: (context, doc) => ListTile(
-        title: Text(doc['title']),
-        subtitle: Text(doc['company']),
-      ),
+      itemBuilder: (context, doc) {
+        final job = doc.data();
+        return Dismissible(
+          key: Key(doc.id),
+          background: const ColoredBox(color: Colors.red),
+          direction: DismissDirection.endToStart,
+          onDismissed: (_) {
+            final user = ref.read(firebaseAuthProvider).currentUser;
+            ref
+                .read(firestoreRepositoryProvider)
+                .deleteJob(uid: user!.uid, jobId: doc.id);
+          },
+          child: ListTile(
+            title: Text(job.title),
+            subtitle: Text(job.company),
+            onTap: () {
+              final user = ref.read(firebaseAuthProvider).currentUser;
+              final faker = Faker();
+              ref.read(firestoreRepositoryProvider).updateJob(
+                    uid: user!.uid,
+                    jobId: doc.id,
+                    title: faker.job.title(),
+                    company: faker.company.name(),
+                  );
+            },
+          ),
+        );
+      },
     );
   }
 }
