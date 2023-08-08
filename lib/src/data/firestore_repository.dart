@@ -16,8 +16,7 @@ class FirestoreRepository {
     required String title,
     required String company,
   }) =>
-      _firestore.collection('jobs').add({
-        'uid': uid,
+      _firestore.collection('users/$uid/jobs').add({
         'title': title,
         'company': company,
       });
@@ -25,13 +24,10 @@ class FirestoreRepository {
   Query<Job> jobsQuery({
     required String uid,
   }) =>
-      _firestore
-          .collection('jobs')
-          .withConverter(
+      _firestore.collection('users/$uid/jobs').withConverter(
             fromFirestore: (snapshot, _) => Job.fromMap(snapshot.data()!),
             toFirestore: (job, _) => job.toMap(),
-          )
-          .where('uid', isEqualTo: uid);
+          );
 
   Future<void> updateJob({
     required String uid,
@@ -39,8 +35,7 @@ class FirestoreRepository {
     required String title,
     required String company,
   }) =>
-      _firestore.doc('jobs/$jobId').update({
-        'uid': uid,
+      _firestore.doc('users/$uid/jobs/$jobId').update({
         'title': title,
         'company': company,
       });
@@ -49,7 +44,7 @@ class FirestoreRepository {
     required String uid,
     required String jobId,
   }) =>
-      _firestore.doc('jobs/$jobId').delete();
+      _firestore.doc('users/$uid/jobs/$jobId').delete();
 }
 
 @riverpod
