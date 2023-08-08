@@ -19,14 +19,21 @@ class FirestoreRepository {
       _firestore.collection('users/$uid/jobs').add({
         'title': title,
         'company': company,
+        'createdAt': FieldValue.serverTimestamp(),
       });
 
   Query<Job> jobsQuery({
     required String uid,
   }) =>
-      _firestore.collection('users/$uid/jobs').withConverter(
+      _firestore
+          .collection('users/$uid/jobs')
+          .withConverter(
             fromFirestore: (snapshot, _) => Job.fromMap(snapshot.data()!),
             toFirestore: (job, _) => job.toMap(),
+          )
+          .orderBy(
+            'createdAt',
+            descending: true,
           );
 
   Future<void> updateJob({
