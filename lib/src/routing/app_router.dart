@@ -1,3 +1,4 @@
+import 'package:faker_app_flutter_firebase/src/routing/go_router_refresh_stream.dart';
 import 'package:faker_app_flutter_firebase/src/screens/custom_profile_screen.dart';
 import 'package:faker_app_flutter_firebase/src/screens/custom_sign_in_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,6 +26,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       }
       return null;
     },
+    refreshListenable: GoRouterRefreshStream(FirebaseAuth.instance.authStateChanges()),
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
