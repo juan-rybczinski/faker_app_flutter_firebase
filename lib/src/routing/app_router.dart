@@ -1,5 +1,6 @@
 import 'package:faker_app_flutter_firebase/src/screens/custom_profile_screen.dart';
 import 'package:faker_app_flutter_firebase/src/screens/custom_sign_in_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,6 +12,19 @@ enum AppRoute {
 final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     initialLocation: '/sign-in',
+    redirect: (context, state) {
+      final isLoggedIn = FirebaseAuth.instance.currentUser != null;
+      if (isLoggedIn) {
+        if (state.location == '/sign-in') {
+          return '/profile';
+        }
+      } else {
+        if (state.location == '/profile') {
+          return '/sign-in';
+        }
+      }
+      return null;
+    },
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
