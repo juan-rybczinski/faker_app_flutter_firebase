@@ -22,10 +22,16 @@ class FirestoreRepository {
         'company': company,
       });
 
-  Query<Job> jobsQuery() => _firestore.collection('jobs').withConverter(
-        fromFirestore: (snapshot, _) => Job.fromMap(snapshot.data()!),
-        toFirestore: (job, _) => job.toMap(),
-      );
+  Query<Job> jobsQuery({
+    required String uid,
+  }) =>
+      _firestore
+          .collection('jobs')
+          .withConverter(
+            fromFirestore: (snapshot, _) => Job.fromMap(snapshot.data()!),
+            toFirestore: (job, _) => job.toMap(),
+          )
+          .where('uid', isEqualTo: uid);
 
   Future<void> updateJob({
     required String uid,
