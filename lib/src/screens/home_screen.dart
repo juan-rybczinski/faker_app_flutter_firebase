@@ -1,3 +1,4 @@
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:faker/faker.dart';
 import 'package:faker_app_flutter_firebase/src/data/firestore_repository.dart';
 import 'package:faker_app_flutter_firebase/src/data/functions_repository.dart';
@@ -22,11 +23,13 @@ class HomeScreen extends ConsumerWidget {
               try {
                 await ref.read(functionRepositoryProvider).deleteAllUserJobs();
               } catch (e) {
-                showAlertDialog(
-                  context: context,
-                  title: 'An error occured',
-                  content: e.toString(),
-                );
+                if (e is FirebaseFunctionsException) {
+                  showAlertDialog(
+                    context: context,
+                    title: 'An error occured',
+                    content: e.message,
+                  );
+                }
               }
             },
             icon: const Icon(Icons.delete),
@@ -44,10 +47,10 @@ class HomeScreen extends ConsumerWidget {
           final user = ref.read(firebaseAuthProvider).currentUser;
           final faker = Faker();
           ref.read(firestoreRepositoryProvider).addJob(
-                uid: user!.uid,
-                title: faker.job.title(),
-                company: faker.company.name(),
-              );
+            uid: user!.uid,
+            title: faker.job.title(),
+            company: faker.company.name(),
+          );
         },
       ),
     );
@@ -81,19 +84,19 @@ class JobsListView extends ConsumerWidget {
             subtitle: Text(job.company),
             trailing: job.createdAt != null
                 ? Text(
-                    job.createdAt.toString(),
-                    style: Theme.of(context).textTheme.bodySmall,
-                  )
+              job.createdAt.toString(),
+              style: Theme.of(context).textTheme.bodySmall,
+            )
                 : null,
             onTap: () {
               final user = ref.read(firebaseAuthProvider).currentUser;
               final faker = Faker();
               ref.read(firestoreRepositoryProvider).updateJob(
-                    uid: user!.uid,
-                    jobId: doc.id,
-                    title: faker.job.title(),
-                    company: faker.company.name(),
-                  );
+                uid: user!.uid,
+                jobId: doc.id,
+                title: faker.job.title(),
+                company: faker.company.name(),
+              );
             },
           ),
         );
