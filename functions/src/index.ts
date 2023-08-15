@@ -16,6 +16,10 @@ export const makeJobTitleUppercase = functions.firestore.onDocumentWritten("/use
     }
 
     const uppercase = data.title.toUpperCase()
+    if (uppercase === data.title) {
+        return
+    }
+
     logger.log(`Uppercasing ${change.after.ref.path}: ${data.title} => ${uppercase}`)
     return change.after.ref.set({title: uppercase}, {merge: true})
 })
