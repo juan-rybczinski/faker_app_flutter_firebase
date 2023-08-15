@@ -1,1 +1,26 @@
-{"kind":"identitytoolkit#DownloadAccountResponse","users":[{"localId":"ot2m1xy4Mys1QrcPS4W6R8d2WRmI","createdAt":"1692070571715","lastLoginAt":"1692070653875","passwordHash":"fakeHash:salt=fakeSaltCABiDmYUN8GOY9M9OI1a:password=asdfasdf","salt":"fakeSaltCABiDmYUN8GOY9M9OI1a","passwordUpdatedAt":1692071960133,"providerUserInfo":[{"providerId":"password","email":"asdf@adsf.com","federatedId":"asdf@adsf.com","rawId":"asdf@adsf.com"}],"validSince":"1692071960","email":"asdf@adsf.com","emailVerified":false,"disabled":false}]}
+{
+  "kind": "identitytoolkit#DownloadAccountResponse",
+  "users": [
+    {
+      "localId": "ot2m1xy4Mys1QrcPS4W6R8d2WRmI",
+      "createdAt": "1692070571715",
+      "lastLoginAt": "1692070653875",
+      "passwordHash": "fakeHash:salt=fakeSaltCABiDmYUN8GOY9M9OI1a:password=asdfasdf",
+      "salt": "fakeSaltCABiDmYUN8GOY9M9OI1a",
+      "passwordUpdatedAt": 1692072619975,
+      "providerUserInfo": [
+        {
+          "providerId": "password",
+          "email": "asdf@adsf.com",
+          "federatedId": "asdf@adsf.com",
+          "rawId": "asdf@adsf.com"
+        }
+      ],
+      "validSince": "1692072619",
+      "email": "asdf@adsf.com",
+      "emailVerified": false,
+      "disabled": false,
+      "lastRefreshAt": "2023-08-15T06:23:52.009Z"
+    }
+  ]
+}
