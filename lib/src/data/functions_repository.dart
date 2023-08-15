@@ -20,5 +20,6 @@ class FunctionRepository {
 
 @riverpod
 FunctionRepository functionRepository(FunctionRepositoryRef ref) {
-  return FunctionRepository(functions: FirebaseFunctions.instance);
+  return FunctionRepository(
+      functions: FirebaseFunctions.instanceFor(region: 'asia-northeast3'));
 }

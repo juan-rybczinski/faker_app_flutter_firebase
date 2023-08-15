@@ -7,7 +7,7 @@
       "lastLoginAt": "1692070653875",
       "passwordHash": "fakeHash:salt=fakeSaltCABiDmYUN8GOY9M9OI1a:password=asdfasdf",
       "salt": "fakeSaltCABiDmYUN8GOY9M9OI1a",
-      "passwordUpdatedAt": 1692072619975,
+      "passwordUpdatedAt": 1692088017807,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -16,11 +16,10 @@
           "rawId": "asdf@adsf.com"
         }
       ],
-      "validSince": "1692072619",
+      "validSince": "1692088017",
       "email": "asdf@adsf.com",
       "emailVerified": false,
-      "disabled": false,
-      "lastRefreshAt": "2023-08-15T06:23:52.009Z"
+      "disabled": false
     }
   ]
 }

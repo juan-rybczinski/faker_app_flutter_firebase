@@ -4,6 +4,8 @@ import * as functions from "firebase-functions/v2"
 
 admin.initializeApp()
 
+functions.setGlobalOptions({ region: "asia-northeast3" })
+
 export const makeJobTitleUppercase = functions.firestore.onDocumentWritten("/users/{uid}/jobs/{jobId}", (event) => {
   const change = event.data
   if (change === undefined) {
